@@ -152,7 +152,7 @@ for (periodo in c("2023", "2024")) {
 grafico <- highchart() %>%
   #Aqui se puede cambiar el contenido del titulo, y el tamaño del mismo y de los ejes
   hc_chart(type = "column", zoomType = "xy") %>%
-  hc_title(text = "Total de homicidios y lesiones dolosas por arma de fuego por alcaldía", style = list(fontSize = "24px")) %>%
+  hc_title(text = "Total de robos a transeúnte en vía pública con violencia por alcaldía", style = list(fontSize = "24px")) %>%
   hc_xAxis(type = "category", labels = list(style = list(fontSize = "19px"))) %>%
   hc_yAxis(labels = list(style = list(fontSize = "25px"))) %>%
   #Apartir de aqui se puede modificar el tooltip, en esye caso se usa javascript para su creacion
