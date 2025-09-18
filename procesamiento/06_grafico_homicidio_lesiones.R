@@ -54,7 +54,6 @@ df_semanal <- semanal %>%
   ) %>% 
   filter(!is.na(periodo)) 
 
-
 agrupado <- df_semanal %>% 
   filter(categoria_delito == 'Robo a transeúnte en vía pública con violencia') %>% 
   procesar_datos(agrupaciones = c("alcaldia_hecho", "colonia_hecho", "nombre_sec", "Nomenclatu", "categoria_delito", "periodo"), 
@@ -64,15 +63,15 @@ agrupado <- df_semanal %>%
 
 
 #Genera Grafica particionada. Se limpian los datos
-#datos <- tabla_desglosada_final(agrupado)
+datos <- tabla_desglosada_final_robo(agrupado)
 
 datos <- datos %>% slice(-1)
 
 datos <- datos %>%
   filter(Nomenclatu != "TOTALES")
 
-datos <- datos[, -5]
-datos <- datos[, -7]
+#datos <- datos[, -5]
+#datos <- datos[, -7]
 #write.csv(datos, file = "archivo.csv", row.names = FALSE)
 datos
 datos <- datos %>%
@@ -86,8 +85,8 @@ datos <- datos %>%
 #En esta parte se incluyen ambos periodos en el primer nivel
 filtered_data <- datos %>%
   mutate(
-    Robos2023 = `Robo a transeúnte en vía pública con violencia_Anterior`,
-    Robos2024 = `Robo a transeúnte en vía pública con violencia_Actual`
+    Robos2023 = `Anterior`,
+    Robos2024 = `Actual`
   )
 #ordenados por el valor total
 nivel1 <- filtered_data %>%
@@ -95,8 +94,8 @@ nivel1 <- filtered_data %>%
   summarise(
     total_delitos_2023 = sum(Robos2023, na.rm = TRUE),
     total_delitos_2024 = sum(Robos2024, na.rm = TRUE),
-    Robos2023 = sum(Lesiones2023, na.rm = TRUE),
-    Robos2024 = sum(Lesiones2024, na.rm = TRUE),
+    Robos2023 = sum(Robos2023, na.rm = TRUE),
+    Robos2024 = sum(Robos2024, na.rm = TRUE),
     .groups = "drop"
   ) %>%
   arrange(desc(total_delitos_2024)) %>%
@@ -118,8 +117,8 @@ nivel2 <- filtered_data %>%
   summarise(
     total_delitos_2023 = sum(Robos2023, na.rm = TRUE),
     total_delitos_2024 = sum(Robos2024, na.rm = TRUE),
-    Lesiones2023 = sum(Robos2023, na.rm = TRUE),
-    Lesiones2024 = sum(Robos2024, na.rm = TRUE),
+    Robos2023 = sum(Robos2023, na.rm = TRUE),
+    Robos2024 = sum(Robos2024, na.rm = TRUE),
     .groups = "drop"
   ) %>%
   arrange(desc(total_delitos_2024))

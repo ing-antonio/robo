@@ -129,3 +129,4 @@ grafico_combinado <- grafico_semanal | grafico_anual
 # Guardar el gráfico combinado
 ggsave(here("salidas/imagenes","grafica_comparativa.png"), plot = grafico_combinado, width = 16, height = 8)
 
+dbDisconnect(conn)

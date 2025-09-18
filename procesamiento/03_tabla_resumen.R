@@ -519,3 +519,4 @@ guardar_flextable_png <- function(ft, nombre_archivo, ancho, alto, zoom = 2) {
 guardar_flextable_png(ft, here("salidas/imagenes/tabla_federal.png"), ancho = 1300, alto = 1000, zoom = 2)
 
 
+dbDisconnect(conn)
