@@ -103,10 +103,14 @@ nivel1 <- filtered_data %>%
     name = alcaldia_hecho,
     drilldown_2023 = paste0(alcaldia_hecho, "_2023"),
     drilldown_2024 = paste0(alcaldia_hecho, "_2024"),
-    tooltip = paste0(
+    tooltip1 = paste0(
       "<b>Alcaldía:</b> ", alcaldia_hecho, "<br>",
-      "<b>Robos semana actual:</b> ", Robos2024, "<br>",
-      "<b>Robos semana pasada:</b> ", Robos2023
+      "<b>Robos semana actual:</b> ", Robos2023
+      
+    ),
+    tooltip2 = paste0(
+      "<b>Alcaldía:</b> ", alcaldia_hecho, "<br>",
+      "<b>Robos semana actual:</b> ", Robos2024
       
     )
   )
@@ -137,10 +141,14 @@ for (periodo in c("2023", "2024")) {
           list(
             name = data$Nomenclatu[i],
             y = data[[paste0("total_delitos_", periodo)]][i],
-            customTooltip = paste0(
+            customTooltip1 = paste0(
               "<b>", data$Nomenclatu[i], "</b><br>",
-              "Robos semana actual: ", data$Robos2024[i], "<br>",
-              "Robos semana pasada: ", data$Robos2023[i]
+              "Robos semana actual: ", data$Robos2024[i]
+              
+            ),
+            customTooltip2 = paste0(
+              "<b>", data$Nomenclatu[i], "</b><br>",
+              "Robos semana actual: ", data$Robos2023[i]
               
             )
           )
@@ -181,16 +189,16 @@ grafico <- highchart() %>%
     name = "Total delitos semana pasada",
     color = "#BC955C",
     data = nivel1 %>%
-      select(name, total_delitos_2023, drilldown_2023, tooltip) %>%
-      rename(y = total_delitos_2023, drilldown = drilldown_2023, customTooltip = tooltip) %>%
+      select(name, total_delitos_2023, drilldown_2023, tooltip1) %>%
+      rename(y = total_delitos_2023, drilldown = drilldown_2023, customTooltip1 = tooltip1) %>%
       list_parse()
   ) %>%
   hc_add_series(
     name = "Total delitos semana actual",
     color = "#B02858",
     data = nivel1 %>%
-      select(name, total_delitos_2024, drilldown_2024, tooltip) %>%
-      rename(y = total_delitos_2024, drilldown = drilldown_2024, customTooltip = tooltip) %>%
+      select(name, total_delitos_2024, drilldown_2024, tooltip2) %>%
+      rename(y = total_delitos_2024, drilldown = drilldown_2024, customTooltip2 = tooltip2) %>%
       list_parse()
   ) %>%
   hc_drilldown(
