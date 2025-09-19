@@ -187,7 +187,7 @@ grafico <- highchart() %>%
   #Esto es cada nivel donde se le puede cambiar los colores y el 
   hc_add_series(
     name = "Total delitos semana pasada",
-    color = "#BC955C",
+    color = "#a9a9a9",
     data = nivel1 %>%
       select(name, total_delitos_2023, drilldown_2023, tooltip1) %>%
       rename(y = total_delitos_2023, drilldown = drilldown_2023, customTooltip1 = tooltip1) %>%
@@ -195,7 +195,7 @@ grafico <- highchart() %>%
   ) %>%
   hc_add_series(
     name = "Total delitos semana actual",
-    color = "#B02858",
+    color = "#2f4f4f",
     data = nivel1 %>%
       select(name, total_delitos_2024, drilldown_2024, tooltip2) %>%
       rename(y = total_delitos_2024, drilldown = drilldown_2024, customTooltip2 = tooltip2) %>%
